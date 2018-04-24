@@ -14,29 +14,30 @@ class Decks extends Component{
     };
 
     renderItem = ({item}) => {
-            return <Deck deck={item} navigation={this.props.navigation}></Deck>
+        return <Deck deck={item} decks={this.props.decks} navigation={this.props.navigation}></Deck>
     };
 
     componentDidMount () {
-        const { dispatch } = this.props
-        debugger;
-        fetchResults()
-            .then((decks) => dispatch(actions.loadDecks(decks)))
-            .then(({ decks }) => {
-                debugger;
-                console.log(decks);
-                this.setState(() => ({ decks }))
-            })
-            .then(() => this.setState(() => ({ready: true})))
+        // const { dispatch } = this.props;
+        // debugger;
+        // fetchResults()
+        //     .then((decks) => dispatch(actions.loadDecks(decks)))
+        //     .then(({ decks }) => {
+        //         debugger;
+        //         console.log(decks);
+        //         this.setState(() => ({ decks }))
+        //     })
+        //     .then(() => this.setState(() => ({ready: true})))
     }
 
     render() {
         const {  } = this.state;
+        const {navigation} = this.props;
 
-
+        const decks = this.props.decks || navigation.state.params.decks;
         return (
             <View>
-                <FlatList data={Object.values(this.props.decks)} renderItem={this.renderItem}>
+                <FlatList data={Object.values(decks)} renderItem={this.renderItem}>
                 </FlatList>
             </View>
         )
@@ -52,7 +53,7 @@ function mapStateToProps (state, { navigation }) {
 function mapDispatchToProps (dispatch, { navigation }) {
     return {
         // // actions: bindActionCreators(actions, dispatch),
-        // addNewPost: (data) => dispatch(actions.addNewPost(data)),
+        addNewDeck: (data) => dispatch(actions.addNewDeck(data)),
         // editPost: (data) => dispatch(actions.editPost(data)),
         // deletePost: (data) => dispatch(actions.deletePost(data)),
         // addCommentToPost: (data) => dispatch(actions.addCommentToPost(data)),

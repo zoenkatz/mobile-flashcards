@@ -17,7 +17,7 @@ export default class DeckView extends Component{
 
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.push(
                     'NewQuestion',
-                    {title: ''}
+                    {title: '', deck: navigation.state.params.deck}
                 )} underlayColor="#FFFFFF">
                     <Text style={styles.btnText}>Add Card</Text>
                 </TouchableOpacity>

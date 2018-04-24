@@ -21,7 +21,8 @@ export default class Answer extends Component{
 
                 <TouchableOpacity style={styles.btnViewAnswer} onPress={() => navigation.replace(
                     'Question',
-                    {title: 'Question', question: navigation.state.params.question, index: navigation.state.params.questionIndex, questions: navigation.state.params.questions}
+                    {title: 'Question', question: navigation.state.params.question, index: navigation.state.params.questionIndex, questions: navigation.state.params.questions,
+                        deck: navigation.state.params.deck}
                 )} underlayColor="#FFFFFF">
                     <Text>Question</Text>
                 </TouchableOpacity>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 30,
+        margin: 48,
         width: 100
     },
     btnInCorrect: {
@@ -57,17 +58,15 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 30,
+        margin: 48,
         width: 100
-
     },
     btnViewAnswer:{
         backgroundColor: '#f5deb3',
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 30,
+        margin: 48,
         width: 100
-
     }
 });

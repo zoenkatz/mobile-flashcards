@@ -1,7 +1,7 @@
 import {getFlashcardsData} from './helpers'
 import { AsyncStorage } from 'react-native'
 
-export const STORAGE_KEY = 'Flashcards:cards';
+export const STORAGE_KEY = 'Flashcards:decks';
 
 
 function setData() {
@@ -11,7 +11,6 @@ function setData() {
         React: React,
         JavaScript: JavaScript
     }
-    debugger;
 
     AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data)).then((res) =>{
         console.log(res);

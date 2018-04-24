@@ -9,76 +9,92 @@ import {StackNavigator} from "react-navigation";
 
 export default class  extends Component{
 
-    checkIfCorrect = (questionItem) => {
-        if(questionItem.answer === 'Yes'){
+    checkIfCorrect = (questionItem, navigation, questionIndex, questions, deck) => {
+        if(questionItem && questionItem.answer === 'Yes'){
             questionItem.correct = true;
         }
+
+        this.goToNextScreen(navigation, questionIndex, questions, deck);
     }
 
-    checkIfInCorrect = (questionItem) => {
-        if(questionItem.answer === 'No'){
+    checkIfInCorrect = (questionItem, navigation, questionIndex, questions, deck) => {
+        if(questionItem && questionItem.answer === 'No'){
             questionItem.correct = true;
         }
+
+        this.goToNextScreen(navigation, questionIndex, questions, deck);
+
     }
 
-    goToNextScreen = (navigation, questionIndex, questions) => {
+    goToNextScreen = (navigation, questionIndex, questions, deck) => {
         let nextQuestionItem = questions[questionIndex + 1];
         navigation.push(
             'Question',
-            {question: nextQuestionItem}
+            {index: questionIndex+1, deck: deck, question: nextQuestionItem}
         );
 
     };
 
     render() {
-        const {deck, question, navigation} = this.props;
+        let {deck, question, navigation} = this.props;
         let questionItem = {};
         let questionIndex = 0;
         let questions = [];
+        deck = deck || navigation.state.params.deck;
 
         if (question) {
             questionItem = question.item;
             questionIndex = question.index;
         }
-        else {
+        else if(navigation.state.params){
             questionItem = navigation.state.params.question;
             questionIndex = navigation.state.params.index;
         }
 
-        deck ? questions = deck.questions : questions = navigation.state.params.questions;
+        if(deck){
+            questions = deck.questions
+        }
+        else if(navigation.state.params.deck){
+            questions = navigation.state.params.deck.questions;
+        }
+        else{
+
+        }
 
         return (
 
             <View style={styles.questionView}>
-                {!questionItem.correct ?
+                {questionIndex < questions.length ?
                     <View>
-                        <Text>{questionItem.question}</Text>
+                        <Text>{questionItem && questionItem.question}</Text>
 
                         <TouchableOpacity style={styles.btnViewAnswer} onPress={() => navigation.replace(
                             'Answer',
-                            {title: 'Answer', question: questionItem, questionIndex: questionIndex, questions: questions}
+                            {title: 'Answer', question: questionItem, questionIndex: questionIndex, questions: questions, deck: deck}
                         )} underlayColor="#FFFFFF">
                             <Text>Answer</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.btnCorrect} onPress={() => this.checkIfCorrect(questionItem)}>
+                        <TouchableOpacity style={styles.btnCorrect} onPress={() => this.checkIfCorrect(questionItem, navigation, questionIndex, questions, deck)}>
                             <Text>Correct</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.btnInCorrect} onPress={() => this.checkIfInCorrect(questionItem)}>
+                        <TouchableOpacity style={styles.btnInCorrect} onPress={() => this.checkIfInCorrect(questionItem, navigation, questionIndex, questions, deck)}>
                             <Text>Incorrect</Text>
                         </TouchableOpacity>
 
-                        {questions && (questionIndex < questions.length - 1) ?
-                        <TouchableHighlight onPress={() => this.goToNextScreen(navigation, questionIndex, questions)}>
-                            <Text >Next Question</Text>
-                        </TouchableHighlight> : <Text/>}
+                        {(questions && (questionIndex <= questions.length)) ?
+                            <View>
+                                <TouchableHighlight style={styles.btnNext} onPress={() => this.goToNextScreen(navigation, questionIndex, questions, deck)}>
+                                    <Text >Next Question</Text>
+                                </TouchableHighlight>
+                                <Text> Number of cards left in the quiz: {questions.length - questionIndex}</Text>
+                            </View> : <View></View>}
 
-                        {questions ?
-                            <Text> Number of cards left in the quiz: {questions.length - questionIndex}</Text>:
-                            <Text></Text>}
                     </View> :<View>
-                        <Text>Quiz is done! 100% correct</Text>
+                        <Text>Quiz is done! {(questions.filter((question) => {
+                            return question.correct
+                        }).length)/questions.length * 100}% correct</Text>
                     </View>}
 
             </View>
@@ -97,7 +113,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 30,
+        margin: 32,
         width: 100
 
     },
@@ -106,7 +122,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 30,
+        margin: 32,
         width: 100
 
     },
@@ -115,8 +131,16 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 30,
+        margin: 32,
         width: 100
 
+    },
+    btnNext:{
+        backgroundColor: '#f67565',
+        padding: 5,
+        borderRadius: 3,
+        height: 48,
+        margin: 32,
+        width: 100
     }
 });

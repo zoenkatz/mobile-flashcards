@@ -20,7 +20,7 @@ export default class Quiz extends Component{
 
             <View>
                 <FlatList data={navigation.state.params.deck.questions} keyExtractor={(item, index) => index}
-                           initialNumToRender={1} renderItem={this.renderItem} removeClippedSubviews={true}></FlatList>
+                          initialNumToRender={1} renderItem={this.renderItem} removeClippedSubviews={true}></FlatList>
 
             </View>
         )

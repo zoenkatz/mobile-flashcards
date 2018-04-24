@@ -15,7 +15,7 @@ export default class Deck extends Component{
 
             <View style={styles.deckItem}>
                 <TouchableOpacity onPress={() => navigation.push(
-                     'DeckView',
+                    'DeckView',
                     {deck: deck}
                 )} underlayColor="#FFFFFF">
                     <Text>{deck && deck.title}</Text>

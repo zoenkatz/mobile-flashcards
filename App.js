@@ -19,10 +19,11 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import NewQuestion from "./components/NewQuestion";
 import Answer from "./components/Answer";
 import Question from "./components/Question";
+import { setLocalNotification } from './utils/helpers'
+import * as api from './utils/api'
 
 
 function StatusMainBar (bar, ...props){
-    debugger;
     return (
         <View style={{backgroundColor: bar.backgroundColor, height: Constants.statusBarHeight }}>
             <StatusBar translucent backgroundColor={bar.backgroundColor} {...props} />
@@ -48,15 +49,6 @@ const Tabs = TabNavigator({
         },
     },
 
-    // },
-    // Quiz: {
-    //     screen: Quiz,
-    //     navigationOptions: {
-    //         tabBarLabel: 'Quiz',
-    //         tabBarIcon: ({ tintColor }) => <MaterialIcons name='question-answer' size={35} color={tintColor} />
-    //     },
-    //
-    // },
     NewDeck:{
         screen: NewDeck,
         navigationOptions: {
@@ -105,13 +97,21 @@ const Navigator = StackNavigator({
     },
     Question: {
         screen: Question
+    },
+    Decks: {
+        screen: Decks
     }
 })
 
 export default class App extends React.Component {
 
+    componentDidMount() {
+        api.fetchResults().then(() => {
+            setLocalNotification()
+        });
+    }
+
     render() {
-        debugger;
         return (
             <Provider store={store}>
                 <View style={{flex: 1}}>
@@ -133,7 +133,6 @@ const configureStore = () => {
     )
 };
 
-debugger;
 const store = configureStore();
 
 store.dispatch(actions.loadDecks());
