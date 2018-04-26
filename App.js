@@ -105,7 +105,7 @@ const Navigator = StackNavigator({
 
 export default class App extends React.Component {
 
-    componentDidMount() {
+    componentWillMount() {
         api.fetchResults().then(() => {
             setLocalNotification()
         });

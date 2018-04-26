@@ -17,24 +17,11 @@ class Decks extends Component{
         return <Deck deck={item} decks={this.props.decks} navigation={this.props.navigation}></Deck>
     };
 
-    componentDidMount () {
-        // const { dispatch } = this.props;
-        // debugger;
-        // fetchResults()
-        //     .then((decks) => dispatch(actions.loadDecks(decks)))
-        //     .then(({ decks }) => {
-        //         debugger;
-        //         console.log(decks);
-        //         this.setState(() => ({ decks }))
-        //     })
-        //     .then(() => this.setState(() => ({ready: true})))
-    }
-
     render() {
         const {  } = this.state;
         const {navigation} = this.props;
 
-        const decks = this.props.decks || navigation.state.params.decks || {};
+        const decks = this.props.decks || (navigation && navigation.state && navigation.state.params && navigation.state.params.decks) || {};
         return (
             <View>
                 <FlatList data={Object.values(decks)} renderItem={this.renderItem}>
@@ -52,20 +39,7 @@ function mapStateToProps (state, { navigation }) {
 
 function mapDispatchToProps (dispatch, { navigation }) {
     return {
-        // // actions: bindActionCreators(actions, dispatch),
-        addNewDeck: (data) => dispatch(actions.addNewDeck(data)),
-        // editPost: (data) => dispatch(actions.editPost(data)),
-        // deletePost: (data) => dispatch(actions.deletePost(data)),
-        // addCommentToPost: (data) => dispatch(actions.addCommentToPost(data)),
-        // editComment: (data) => dispatch(actions.editComment(data)),
-        // voteComment: (data) => dispatch(actions.voteComment(data)),
-        // votePost: (data) => dispatch(actions.votePost(data)),
-        // deleteComment: (data) => dispatch(actions.deleteComment(data)),
-        // //selectCategory: (data) => dispatch(actions.selectCategory(data)),
-        // loadPostsForCategory: (data) => dispatch(actions.loadPostsForCategory(data)),
-        // loadSinglePost: (data) => dispatch(actions.loadSinglePost(data)),
-        // loadingCommentsToPost: (data) => dispatch(actions.loadingCommentsToPost(data))
-
+        addNewDeck: (data) => dispatch(actions.addNewDeck(data))
 
     }
 }
