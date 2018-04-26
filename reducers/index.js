@@ -3,14 +3,7 @@ import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
 import _ from 'lodash'
 
-let initialDecksState = {
-    javascript:{
-
-    },
-    react: {}
-};
-
-function decks(state = initialDecksState, action) {
+function decks(state = {}, action) {
     switch (action.type) {
         case 'LOAD_DECKS_SUCCESS':
             return action.decks;

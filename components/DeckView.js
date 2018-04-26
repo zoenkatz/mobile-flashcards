@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity, Linking } from 'rea
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {green, white} from "../utils/colors";
-import NewQuestion from "./NewQuestion";
+import NewQuestion from "./NewCard/NewQuestion";
 import Quiz from "./Quiz";
 
 export default class DeckView extends Component{

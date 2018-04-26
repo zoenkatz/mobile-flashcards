@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, Linking} from 'react-native'
 import Question from "./Question";
-import Quiz from "./Quiz";
+import Quiz from "../Quiz";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
-import {blue, green, white} from "../utils/colors";
-import DeckView from "./DeckView";
+import {blue, green, white} from "../../utils/colors";
+import DeckView from "../DeckView";
 import {StackNavigator} from "react-navigation";
 
 export default class Answer extends Component{

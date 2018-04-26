@@ -34,7 +34,7 @@ class Decks extends Component{
         const {  } = this.state;
         const {navigation} = this.props;
 
-        const decks = this.props.decks || navigation.state.params.decks;
+        const decks = this.props.decks || navigation.state.params.decks || {};
         return (
             <View>
                 <FlatList data={Object.values(decks)} renderItem={this.renderItem}>

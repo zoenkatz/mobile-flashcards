@@ -16,10 +16,10 @@ import { NativeRouter, Route, Link } from 'react-router-native'
 import thunk from 'redux-thunk';
 import * as actions from './actions/index.js'
 import { createStore, applyMiddleware, compose } from 'redux'
-import NewQuestion from "./components/NewQuestion";
-import Answer from "./components/Answer";
-import Question from "./components/Question";
-import { setLocalNotification } from './utils/helpers'
+import NewQuestion from "./components/NewCard/NewQuestion";
+import Answer from "./components/NewCard/Answer";
+import Question from "./components/NewCard/Question";
+import { setLocalNotification } from './utils/SetInitialData'
 import * as api from './utils/api'
 
 

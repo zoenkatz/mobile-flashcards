@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity, Linking, FlatList} from 'react-native'
-import Question from "./Question";
+import Question from "./NewCard/Question";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types';
 import {blue, green, white} from "../utils/colors";

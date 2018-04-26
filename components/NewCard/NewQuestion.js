@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, Platform, TouchableOpacity, Linking} from 'react-native'
 import { AsyncStorage } from 'react-native'
 import { connect } from 'react-redux'
-import * as actions from '../actions/index'
+import * as actions from '../../actions/index'
 import PropTypes from 'prop-types';
-import {blue, green, white} from "../utils/colors";
-import DeckView from "./DeckView";
+import {blue, green, white} from "../../utils/colors";
+import DeckView from "../DeckView";
 import {StackNavigator} from "react-navigation";
 
 class NewQuestion extends Component{

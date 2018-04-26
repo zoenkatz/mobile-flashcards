@@ -28,7 +28,8 @@ class NewDeck extends Component{
 
         this.props.addNewDeck(this.state.newDeck).then((data) => {
             navigation.replace(
-                'Decks'
+                'DeckView',
+                {deck: this.state.newDeck}
             )
         });
 
