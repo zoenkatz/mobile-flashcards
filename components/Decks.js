@@ -10,7 +10,33 @@ import Deck from './Deck'
 class Decks extends Component{
     state = {
         ready: false,
-        decks: {}
+        decks: {
+            React: {
+                title: 'React',
+                questions: [
+                    {
+                        question: 'Redux can be used in React?',
+                        answer: 'Yes',
+                        correct: false
+                    },
+                    {
+                        question: 'Do you make Ajax requests in React\'s componentDidMount lifecycle event?',
+                        answer: 'Yes',
+                        correct: false
+                    }
+                ]
+            },
+            JavaScript: {
+                title: 'JavaScript',
+                questions: [
+                    {
+                        question: 'Is null an object?',
+                        answer: 'Yes',
+                        correct: false
+                    }
+                ]
+            }
+        }
     };
 
     renderItem = ({item}) => {
@@ -18,13 +44,12 @@ class Decks extends Component{
     };
 
     render() {
-        const {  } = this.state;
         const {navigation} = this.props;
 
-        const decks = this.props.decks || (navigation && navigation.state && navigation.state.params && navigation.state.params.decks) || {};
+        const decks =  this.props.decks || this.state.decks || (navigation && navigation.state && navigation.state.params && navigation.state.params.decks);
         return (
             <View>
-                <FlatList data={Object.values(decks)} renderItem={this.renderItem}>
+                <FlatList data={Object.values(decks)} renderItem={this.renderItem} keyExtractor={(item, index) => index}>
                 </FlatList>
             </View>
         )
@@ -49,5 +74,5 @@ export default connect(
 )(Decks)
 
 Decks.propTypes = {
-    decks: PropTypes.object.isRequired,
+    //decks: PropTypes.object.isRequired,
 }

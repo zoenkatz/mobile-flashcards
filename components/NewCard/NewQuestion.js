@@ -64,8 +64,8 @@ class NewQuestion extends Component{
         return (
 
             <View>
-                <Text style={styles.inputField}>Question: </Text><TextInput placeholder='Insert Question' value={this.state.newCard.question} style={styles.inputField} name='question' onChange={(e) => this.handleChange(e.nativeEvent.text, 'question')}></TextInput>
-                <Text style={styles.inputField}>Answer: </Text><TextInput placeholder='Insert Answer' value={this.state.newCard.answer} style={styles.inputField} name='answer' onChange={(e) => this.handleChange(e.nativeEvent.text, 'answer')}></TextInput>
+                <Text style={styles.inputField}>Question: </Text><TextInput placeholder='Insert Yes/No Question' value={this.state.newCard.question} style={styles.inputField} name='question' onChange={(e) => this.handleChange(e.nativeEvent.text, 'question')}></TextInput>
+                <Text style={styles.inputField}>Answer: </Text><TextInput placeholder='Insert Answer - Yes or No' value={this.state.newCard.answer} style={styles.inputField} name='answer' onChange={(e) => this.handleChange(e.nativeEvent.text, 'answer')}></TextInput>
 
                 <TouchableOpacity style={styles.btnSubmit} onPress={(e) => this.handleSubmit(e, this.state.newCard, navigation.state.params.deck, navigation)}>
                     <Text style={styles.inputField}>Submit</Text>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         width: 100
     },
     inputField: {
-        width: 100,
+        width: 200,
         height: 20
     }
 });

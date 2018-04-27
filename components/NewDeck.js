@@ -83,7 +83,7 @@ export default connect(
 )(NewDeck)
 
 NewDeck.propTypes = {
-    decks: PropTypes.object.isRequired,
+    //decks: PropTypes.object.isRequired,
 }
 
 const styles = StyleSheet.create({

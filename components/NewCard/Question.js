@@ -9,21 +9,12 @@ import {StackNavigator} from "react-navigation";
 
 export default class Question extends Component{
 
-    checkIfCorrect = (questionItem, navigation, questionIndex, questions, deck) => {
-        if(questionItem && questionItem.answer === 'Yes'){
+    checkAnswer = (questionItem, navigation, questionIndex, questions, deck, buttonPressed) => {
+        if(questionItem && questionItem.answer === buttonPressed){
             questionItem.correct = true;
         }
 
         this.goToNextScreen(navigation, questionIndex, questions, deck);
-    }
-
-    checkIfInCorrect = (questionItem, navigation, questionIndex, questions, deck) => {
-        if(questionItem && questionItem.answer === 'No'){
-            questionItem.correct = true;
-        }
-
-        this.goToNextScreen(navigation, questionIndex, questions, deck);
-
     }
 
     goToNextScreen = (navigation, questionIndex, questions, deck) => {
@@ -57,9 +48,6 @@ export default class Question extends Component{
         else if(navigation.state.params.deck){
             questions = navigation.state.params.deck.questions;
         }
-        else{
-
-        }
 
         return (
 
@@ -70,16 +58,16 @@ export default class Question extends Component{
 
                         <TouchableOpacity style={styles.btnViewAnswer} onPress={() => navigation.replace(
                             'Answer',
-                            {title: 'Answer', question: questionItem, questionIndex: questionIndex, questions: questions, deck: deck}
+                            {title: 'Answer', question: questionItem, questionIndex: questionIndex, questions: questions, deck: deck, checkAnswerFunc: this.checkAnswer}
                         )} underlayColor="#FFFFFF">
                             <Text>Answer</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.btnCorrect} onPress={() => this.checkIfCorrect(questionItem, navigation, questionIndex, questions, deck)}>
+                        <TouchableOpacity style={styles.btnCorrect} onPress={() => this.checkAnswer(questionItem, navigation, questionIndex, questions, deck, 'Yes')}>
                             <Text>Correct</Text>
                         </TouchableOpacity>
 
-                        <TouchableOpacity style={styles.btnInCorrect} onPress={() => this.checkIfInCorrect(questionItem, navigation, questionIndex, questions, deck)}>
+                        <TouchableOpacity style={styles.btnInCorrect} onPress={() => this.checkAnswer(questionItem, navigation, questionIndex, questions, deck, 'No')}>
                             <Text>Incorrect</Text>
                         </TouchableOpacity>
 
@@ -88,7 +76,7 @@ export default class Question extends Component{
                                 <TouchableHighlight style={styles.btnNext} onPress={() => this.goToNextScreen(navigation, questionIndex, questions, deck)}>
                                     <Text >Next Question</Text>
                                 </TouchableHighlight>
-                                <Text> Number of cards left in the quiz: {questions.length - questionIndex}</Text>
+                                <Text style={styles.numberCards}> Number of cards left in the quiz: {questions.length - questionIndex}</Text>
                             </View> : <View></View>}
 
                     </View> :<View>
@@ -113,7 +101,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 32,
+        margin: 45,
         width: 100
 
     },
@@ -122,7 +110,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 32,
+        margin: 45,
         width: 100
 
     },
@@ -131,7 +119,7 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 32,
+        margin: 45,
         width: 100
 
     },
@@ -140,7 +128,10 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 3,
         height: 48,
-        margin: 32,
+        margin: 45,
         width: 100
+    },
+    numberCards:{
+        padding: 50
     }
 });

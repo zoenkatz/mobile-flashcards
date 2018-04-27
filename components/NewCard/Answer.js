@@ -27,11 +27,11 @@ export default class Answer extends Component{
                     <Text>Question</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnCorrect}>
+                <TouchableOpacity style={styles.btnCorrect} onPress={() => navigation.state.params.checkAnswerFunc(navigation.state.params.question, navigation, navigation.state.params.questionIndex, navigation.state.params.questions, navigation.state.params.deck, 'Yes')}>
                     <Text>Correct</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.btnInCorrect}>
+                <TouchableOpacity style={styles.btnInCorrect} onPress={() => navigation.state.params.checkAnswerFunc(navigation.state.params.question, navigation, navigation.state.params.questionIndex, navigation.state.params.questions, navigation.state.params.deck, 'No')}>
                     <Text>Incorrect</Text>
                 </TouchableOpacity>
 

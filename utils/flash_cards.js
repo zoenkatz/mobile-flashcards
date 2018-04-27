@@ -10,11 +10,12 @@ function setData() {
     const data = {
         React: React,
         JavaScript: JavaScript
-    }
+    };
 
     AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data)).then((res) =>{
+
         console.log(res);
-    })
+    });
 
     return data;
 }

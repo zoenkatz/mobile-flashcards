@@ -14,6 +14,7 @@ export function getDecks() {
         console.log(data);
         return data;
     })
+    //return AsyncStorage.clear();
 };
 
 export function getDeck(key) {
